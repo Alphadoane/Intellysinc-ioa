@@ -325,6 +325,7 @@ const About = () => {
                   src={`${import.meta.env.BASE_URL}images/${p.file}`}
                   alt={p.name + ' logo'}
                   className="about-partner-logo-img"
+                  loading="lazy"
                   onError={e => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}images/placeholder.png`; }}
                 />
               </div>

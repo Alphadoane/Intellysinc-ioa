@@ -33,7 +33,6 @@ const CompanyInfo = lazy(() => import('./pages/CompanyInfo'));
 const Profile = lazy(() => import('./pages/Profile'));
 const AdminBlogManager = lazy(() => import('./components/AdminBlogManager'));
 const AdminAccess = lazy(() => import('./components/AdminAccess'));
-const AllProducts = lazy(() => import('./pages/AllProducts'));
 
 // New Service Pages
 const WorkflowAutomation = lazy(() => import('./pages/WorkflowAutomation'));
@@ -96,7 +95,6 @@ function AnimatedRoutes() {
           <Route path="/canon-scanners" element={<CanonScanners />} />
           <Route path="/fujitsu-ricoh-scanners" element={<FujitsuRicohScanners />} />
           <Route path="/microfilm-scanners" element={<MicrofilmScanners />} />
-          <Route path="/all-products" element={<AllProducts />} />
           <Route path="/products/:category/:productSlug" element={<ProductDetail />} />
           <Route path="/scanning-software" element={<ScanningSoftware />} />
           <Route path="/iris-scanners" element={<IrisScanners />} />
@@ -105,37 +103,37 @@ function AnimatedRoutes() {
           <Route path="/book2net/:productSlug" element={<Book2Net />} />
           <Route path="/book2net" element={<Book2Net />} />
           <Route path="/scanning-software" element={<ScanningSoftware />} />
-          
+
           {/* Test route for new features */}
           <Route path="/test-features" element={<TestNewFeatures />} />
-          
+
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminAccess />} />
-          <Route 
-            path="/admin/blog" 
+          <Route
+            path="/admin/blog"
             element={
               <ProtectedRoute>
                 <AdminBlogManager />
               </ProtectedRoute>
-            } 
+            }
           />
-          
+
           {/* New Analytics and Content Management Routes */}
-          <Route 
-            path="/admin/analytics" 
+          <Route
+            path="/admin/analytics"
             element={
               <ProtectedRoute>
                 <AnalyticsDashboard />
               </ProtectedRoute>
-            } 
+            }
           />
-          <Route 
-            path="/admin/content" 
+          <Route
+            path="/admin/content"
             element={
               <ProtectedRoute>
                 <AdvancedContentManager />
               </ProtectedRoute>
-            } 
+            }
           />
         </Routes>
       </Suspense>

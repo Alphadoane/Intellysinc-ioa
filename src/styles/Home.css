@@ -185,23 +185,23 @@ body {
 
 .sub-text {
   font-size: 1.2rem;
-  color: #e8f4fd;
+  color: #ffffff;
   margin-bottom: 1.5rem;
   line-height: 1.6;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .benefit-text {
   font-size: 1.1rem;
-  color: #d1e7ff;
+  color: #ffffff;
   line-height: 1.7;
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .archive-section {
@@ -255,7 +255,7 @@ body {
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 1rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.9);
   text-align: left;
 }
 
@@ -265,7 +265,7 @@ body {
   line-height: 1.6;
   margin: 0;
   text-align: left;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .features h2 {

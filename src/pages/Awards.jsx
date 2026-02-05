@@ -65,8 +65,8 @@ const Awards = () => {
     { id: 'service', name: 'Customer Service' }
   ];
 
-  const filteredAwards = selectedCategory === 'all' 
-    ? awards 
+  const filteredAwards = selectedCategory === 'all'
+    ? awards
     : awards.filter(award => award.category === selectedCategory);
 
   // CTA Button with navigation functionality
@@ -102,7 +102,7 @@ const Awards = () => {
   return (
     <div className="awards-container">
       {/* Hero Section */}
-      <motion.section 
+      <motion.section
         className="awards-hero"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -121,7 +121,7 @@ const Awards = () => {
           Celebrating Excellence in Technology Solutions<br />
           Recognized for Innovation, Design, and Service Excellence
         </motion.p>
-        
+
         <div className="awards-hero-cta">
           <CTAButton text="View Case Studies" primary={true} onClick={handleViewCaseStudies} />
           <CTAButton text="Contact Us" onClick={handleContactUs} />
@@ -129,7 +129,7 @@ const Awards = () => {
       </motion.section>
 
       {/* Filter Section */}
-      <motion.section 
+      <motion.section
         className="awards-filter"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -152,7 +152,7 @@ const Awards = () => {
       </motion.section>
 
       {/* Awards Grid */}
-      <motion.section 
+      <motion.section
         className="awards-grid"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -167,14 +167,14 @@ const Awards = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.03,
                 boxShadow: "0 8px 25px rgba(0,0,0,0.15)"
               }}
               onClick={() => handleAwardClick(award)}
             >
               <div className="award-icon">
-                <img src={award.icon} alt={award.title} />
+                <img src={award.icon} alt={award.title} loading="lazy" />
               </div>
               <div className="award-content">
                 <h3>{award.title}</h3>
@@ -185,7 +185,7 @@ const Awards = () => {
                     <h4>About This Award</h4>
                     <p>{award.details}</p>
                   </div>
-                  <motion.button 
+                  <motion.button
                     className="award-details-btn"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -219,7 +219,7 @@ const Awards = () => {
               <button className="modal-close" onClick={closeAwardDetails}>×</button>
               <div className="modal-content">
                 <div className="modal-icon">
-                  <img src={selectedAward.icon} alt={selectedAward.title} />
+                  <img src={selectedAward.icon} alt={selectedAward.title} loading="lazy" />
                 </div>
                 <h2>{selectedAward.title}</h2>
                 <p className="modal-organization">{selectedAward.organization}</p>

@@ -23,11 +23,14 @@ export default function ResourceManager() {
   const [deleting, setDeleting] = useState(false);
 
   const fetchResources = () => {
+    const token = localStorage.getItem('admin_token');
     setLoading(true);
-    fetch(API_URL)
+    fetch(API_URL, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
       .then(res => res.json())
       .then(data => {
-        setResources(data);
+        setResources(Array.isArray(data) ? data : []);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -47,9 +50,11 @@ export default function ResourceManager() {
     setDeleting(true);
     setError('');
     try {
-      const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error('Delete failed');
-      fetchResources();
+      const token = localStorage.getItem('admin_token');
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
     } catch (err) {
       setError('Failed to delete.');
     } finally {
@@ -74,9 +79,13 @@ export default function ResourceManager() {
       const method = editing ? 'PUT' : 'POST';
       const url = editing ? `${API_URL}/${editing}` : API_URL;
       const payload = { ...form };
+      const token = localStorage.getItem('admin_token');
       const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(payload)
       });
       if (!res.ok) throw new Error('Save failed');

@@ -19,15 +19,25 @@ function App() {
   const [tab, setTab] = useState('pages');
 
   const fetchPages = () => {
+    const token = localStorage.getItem('admin_token');
+    if (!token) return;
+
     setLoadingPages(true);
-    fetch('http://localhost:5000/api/pages')
+    fetch('http://localhost:5000/api/pages', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
       .then(res => res.json())
       .then(data => {
-        setPages(data);
-        if (data.length && !selectedSlug) setSelectedSlug(data[0].slug);
+        const pagesArray = Array.isArray(data) ? data : [];
+        setPages(pagesArray);
+        if (pagesArray.length && !selectedSlug) setSelectedSlug(pagesArray[0].slug);
         setLoadingPages(false);
       })
-      .catch(() => setLoadingPages(false));
+      .catch((err) => {
+        console.error('Fetch pages error:', err);
+        setPages([]);
+        setLoadingPages(false);
+      });
   };
 
   useEffect(() => {
@@ -39,6 +49,8 @@ function App() {
   useEffect(() => {
     if (loggedIn) {
       fetchPages();
+    } else {
+      setPages([]);
     }
   }, [loggedIn]);
 
@@ -46,6 +58,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem('admin_logged_in');
+    localStorage.removeItem('admin_token');
     setLoggedIn(false);
   };
 
@@ -54,9 +67,13 @@ function App() {
     setCreating(true);
     setError('');
     try {
+      const token = localStorage.getItem('admin_token');
       const res = await fetch('http://localhost:5000/api/pages', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({ slug: newSlug.trim(), title: newTitle.trim() })
       });
       if (!res.ok) {
@@ -78,8 +95,10 @@ function App() {
     setDeleting(true);
     setError('');
     try {
+      const token = localStorage.getItem('admin_token');
       const res = await fetch(`http://localhost:5000/api/pages/${selectedSlug}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) {
         const data = await res.json();

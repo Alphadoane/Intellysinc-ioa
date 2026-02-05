@@ -10,11 +10,14 @@ export default function MediaManager() {
   const fileInput = useRef();
 
   const fetchFiles = () => {
+    const token = localStorage.getItem('admin_token');
     setLoading(true);
-    fetch(API_URL)
+    fetch(API_URL, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
       .then(res => res.json())
       .then(data => {
-        setFiles(data);
+        setFiles(Array.isArray(data) ? data : []);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -32,8 +35,10 @@ export default function MediaManager() {
     const formData = new FormData();
     formData.append('file', fileInput.current.files[0]);
     try {
+      const token = localStorage.getItem('admin_token');
       const res = await fetch(`${API_URL}/upload`, {
         method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` },
         body: formData
       });
       if (!res.ok) throw new Error('Upload failed');
@@ -50,8 +55,11 @@ export default function MediaManager() {
     if (!window.confirm('Delete this file?')) return;
     setError('');
     try {
-      const res = await fetch(`${API_URL}/${filename}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error('Delete failed');
+      const token = localStorage.getItem('admin_token');
+      const res = await fetch(`${API_URL}/${filename}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
       fetchFiles();
     } catch (err) {
       setError('Failed to delete.');

@@ -99,7 +99,7 @@ function SectionEditor({ section, onChange, onRemove, index, onMoveUp, onMoveDow
         <textarea value={JSON.stringify(section.content, null, 2)} onChange={e => {
           try {
             onChange({ ...section, content: JSON.parse(e.target.value) });
-          } catch {}
+          } catch { }
         }} rows={4} style={{ width: '100%', fontFamily: 'monospace' }} />
       </>
     );
@@ -137,8 +137,11 @@ function PageEditor({ slug }) {
   const [newSectionType, setNewSectionType] = useState('hero');
 
   useEffect(() => {
+    const token = localStorage.getItem('admin_token');
     setLoading(true);
-    fetch(`http://localhost:5000/api/pages/${slug}`)
+    fetch(`http://localhost:5000/api/pages/${slug}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
       .then(res => res.json())
       .then(data => {
         setTitle(data.title || '');
@@ -187,9 +190,13 @@ function PageEditor({ slug }) {
     setSaveMsg('');
     setError('');
     try {
+      const token = localStorage.getItem('admin_token');
       const res = await fetch(`http://localhost:5000/api/pages/${slug}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({ title, sections })
       });
       if (!res.ok) throw new Error('Save failed');

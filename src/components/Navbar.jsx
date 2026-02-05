@@ -116,7 +116,7 @@ const Navbar = () => {
         { name: 'Kodak Scanners', path: '/kodak-scanners' },
         { name: 'Microfilm Scanners', path: '/microfilm-scanners' },
         { name: 'Iris Scanners', path: '/iris-scanners' },
-         { name: 'Scan2X', path: '/scan2x' },
+        { name: 'Scan2X', path: '/scan2x' },
         { name: 'Book2Net', path: '/book2net' },
         { name: 'Scanning Software', path: '/scanning-software' },
       ],
@@ -165,7 +165,7 @@ const Navbar = () => {
             </span>
           </button>
 
-          <nav 
+          <nav
             id="nav-links"
             className={`nav-links ${menuOpen ? 'open' : ''}`}
             role="navigation"
@@ -191,7 +191,7 @@ const Navbar = () => {
                   {group.title}
                   <span className="dropdown-arrow" aria-hidden="true">▾</span>
                 </span>
-                <ul 
+                <ul
                   className={`dropdown ${activeGroup === idx ? 'open' : ''}`}
                   role="menu"
                 >
@@ -237,13 +237,13 @@ const Navbar = () => {
                     <span className="user-name">{user?.name || 'User'}</span>
                     <span className="dropdown-arrow">▾</span>
                   </button>
-                  
+
                   <div className={`user-dropdown ${showUserMenu ? 'open' : ''}`}>
                     <div className="user-info">
                       <div className="user-email">{user?.email}</div>
                       <div className="user-role">{user?.role || 'user'}</div>
                     </div>
-                    
+
                     <ul className="user-menu">
                       <li>
                         <Link to="/profile" onClick={() => setShowUserMenu(false)}>
@@ -254,7 +254,7 @@ const Navbar = () => {
                           Profile
                         </Link>
                       </li>
-                      
+
                       {isAdmin && (
                         <>
                           <li>
@@ -293,9 +293,9 @@ const Navbar = () => {
                           </li>
                         </>
                       )}
-                      
+
                       <li className="divider"></li>
-                      
+
                       <li>
                         <button onClick={handleLogout} className="logout-btn">
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

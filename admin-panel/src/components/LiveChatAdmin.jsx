@@ -13,7 +13,10 @@ export default function LiveChatAdmin() {
   const messagesEndRef = useRef();
 
   useEffect(() => {
-    const s = io(SOCKET_URL);
+    const token = localStorage.getItem('admin_token');
+    const s = io(SOCKET_URL, {
+      auth: { token }
+    });
     setSocket(s);
     s.on('connect', () => {
       setConnected(true);
